@@ -1,2 +1,2 @@
 # resteasydemo
-and Example project with RESTEasy 
+Example project with RESTEasy 

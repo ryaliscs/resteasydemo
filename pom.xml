@@ -22,23 +22,23 @@
 			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- core library -->
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jaxrs</artifactId>
-			<version>3.15.1.Final</version>
-		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-jaxb-provider -->
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxb-provider</artifactId>
 			<version>4.6.0.Final</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-jackson-provider -->
+		</dependency>		
+		<!-- https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-jackson2-provider -->
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-jackson-provider</artifactId>
-			<version>3.15.1.Final</version>
+			<artifactId>resteasy-jackson2-provider</artifactId>
+			<version>4.6.0.Final</version>
+		</dependency>		
+		<!-- https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-core -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-core</artifactId>
+			<version>4.6.0.Final</version>
 		</dependency>
 	</dependencies>
 	<build>

@@ -7,11 +7,10 @@ import java.util.Map;
 
 import com.resyeasy.data.PersonPOJO;
 
-
-
 public class UserRepository {
 
 	private static Map<Integer, PersonPOJO> USERS = new HashMap<Integer, PersonPOJO>();
+	private static int nextID = 6;
 
 	static {
 		USERS.put(1, new PersonPOJO(1, "name1"));
@@ -29,6 +28,32 @@ public class UserRepository {
 
 	public static PersonPOJO getUser(int aId) {
 		return USERS.get(Integer.valueOf(aId));
+	}
+
+	public static PersonPOJO createUser(PersonPOJO aPerson) throws RuntimeException {
+		nextID++;
+		PersonPOJO person = new PersonPOJO(nextID, aPerson.getName());
+		PersonPOJO updatedPerson = USERS.put(person.getId(), person);
+		if (updatedPerson != null) {
+			// return null as the person already exists
+			return null;
+		}
+		return person;
+	}
+
+	public static PersonPOJO updateUser(PersonPOJO aPerson) throws RuntimeException {
+
+		PersonPOJO person = USERS.get(aPerson.getId());
+		if (person != null) {
+			person.setName(aPerson.getName());
+			PersonPOJO updatedPerson = USERS.put(person.getId(), person);
+			return updatedPerson;
+		}
+		return null;
+	}
+
+	public static boolean deleteUser(int aId) {
+		return USERS.remove(Integer.valueOf(aId)) != null;
 	}
 
 }

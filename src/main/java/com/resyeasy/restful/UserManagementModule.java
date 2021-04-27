@@ -13,10 +13,9 @@ import javax.ws.rs.core.Response;
 
 import com.resyeasy.data.PersonPOJO;
 import com.resyeasy.repo.UserRepository;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiResponse;
-import com.wordnik.swagger.annotations.ApiResponses;
+
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 /**
  * References :
@@ -29,7 +28,6 @@ import com.wordnik.swagger.annotations.ApiResponses;
  *
  */
 @Path("/user-management")
-@Api(value = "user-management", description = "RestEasy demo")
 public class UserManagementModule {
 
 	/**
@@ -54,9 +52,9 @@ public class UserManagementModule {
 	@GET
 	@Path("/user/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	@ApiOperation(value = "Get user by user id", response = PersonPOJO.class, position = 0)
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "User found"),
-			@ApiResponse(code = 204, message = "User not found") })
+
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "User found"),
+			@ApiResponse(responseCode = "204", description = "User not found") })
 	public Response getUser(@PathParam("id") int id) {
 		PersonPOJO user = UserRepository.getUser(id);
 		if (user != null) {

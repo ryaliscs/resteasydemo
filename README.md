@@ -1,5 +1,5 @@
 # resteasydemo
-Example project with RESTEasy 
+Example project with RESTEasy and Swagger integration 
 
 ## Project Setup (Maven)
 
@@ -14,5 +14,9 @@ run Maven build
 ## Example end-points
 ```
 http://localhost:8080/resteasydemo/user-management/users
-http://localhost:8080/resteasydemo/user-management/user?id=[id]
+http://localhost:8080/resteasydemo/user-management/user?{id}
+```
+## Swagger end-point
+```
+http://localhost:8080/resteasydemo/api-docs/user-management
 ```

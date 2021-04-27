@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
+
 public class RestAppliation extends Application {
 	private Set<Object> singletons = new HashSet<Object>();
 
@@ -16,4 +17,5 @@ public class RestAppliation extends Application {
 	public Set<Object> getSingletons() {
 		return singletons;
 	}
+
 }

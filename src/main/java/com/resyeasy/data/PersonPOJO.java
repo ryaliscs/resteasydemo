@@ -2,6 +2,8 @@ package com.resyeasy.data;
 
 import java.io.Serializable;
 
+import com.wordnik.swagger.annotations.ApiModel;
+@ApiModel(description = "Person Information")
 public class PersonPOJO implements Serializable {
 
 	private static final long serialVersionUID = 1L;

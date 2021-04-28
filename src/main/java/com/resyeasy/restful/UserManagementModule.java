@@ -20,11 +20,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 /**
  * References :
  * 
- * https://www.javaguides.net/2020/01/resteasy-crud-example-tutorial.html
- * 
- * http://www.mastertheboss.com/jboss-frameworks/resteasy/swagger-quickstart-tutorial
- * 
- * https://docs.swagger.io/service/java/tomcat-resteasy-2.html
+ * https://resteasy.github.io/2020/05/22/swagger/
  *
  */
 @Path("/user-management")

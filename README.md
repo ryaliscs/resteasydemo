@@ -13,7 +13,7 @@ run Maven build
 
 ```
 The above command will compile the project and generate the Swagger JSON file:
-target/swagger/jaxrs-api.json
+/src/main/webapp/resources/jaxrs-api.json
 ```
 
 ## Example end-points
@@ -21,8 +21,23 @@ target/swagger/jaxrs-api.json
 http://localhost:8080/resteasydemo/user-management/users
 http://localhost:8080/resteasydemo/user-management/user?{id}
 ```
+## Configuring Swagger as a part of web application 
+```
+1. Go to the Swagger UI GitHub project [https://github.com/swagger-api/swagger-ui]
+2. Click Clone or download
+3. Copy the dist folder from swagger-ui to your resource folder eg: /src/main/webapp/swagger
+4. Inside your swagger-ui folder, open index.html
+5. Look for the following code:
+	url: "http://petstore.swagger.io/v2/swagger.json"
+6. Change the url value to your rest end point URL. 
+	For example:url: "http://localhost:8080/swagger-ui/jaxrs-api.json"
+7. Deploy the application 	
+8. start  your tomcat
 
-## Configuring Swagger with rest end-points
+open http://localhost:8080/resteasydemo/swagger/index.html in your browser 
+```
+
+## Configuring and deploy Swagger outside the web application 
 ```
 1. Go to the Swagger UI GitHub project [https://github.com/swagger-api/swagger-ui]
 2. Click Clone or download

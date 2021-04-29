@@ -69,7 +69,7 @@
 				<version>2.1.9</version>
 				<configuration>
 					<outputFileName>jaxrs-api</outputFileName>
-					<outputPath>${project.build.directory}/swagger</outputPath>
+					<outputPath>${project.basedir}/src/main/webapp/resources</outputPath>
 					<outputFormat>JSON</outputFormat>
 					<configurationFilePath>${project.basedir}/src/main/resources/openapi.json</configurationFilePath>
 				</configuration>

@@ -39,7 +39,12 @@
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-core</artifactId>
 			<version>4.6.0.Final</version>
-		</dependency>		
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-servlet-initializer</artifactId>
+			<version>4.6.0.Final</version>
+		</dependency>
 		<!-- swagger related dependencies -->
 		<dependency>
 			<groupId>io.swagger.core.v3</groupId>
@@ -58,31 +63,16 @@
 			<artifactId>swagger-annotations</artifactId>
 			<version>2.1.9</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-jaxrs2 -->
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-jaxrs2</artifactId>
+			<version>2.1.9</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>RESTEasyDemo</finalName>
-		<plugins>
-			<!-- plugin for api data generation -->
-			<plugin>
-				<groupId>io.swagger.core.v3</groupId>
-				<artifactId>swagger-maven-plugin</artifactId>
-				<version>2.1.9</version>
-				<configuration>
-					<outputFileName>jaxrs-api</outputFileName>
-					<outputPath>${project.basedir}/src/main/webapp/resources</outputPath>
-					<outputFormat>JSON</outputFormat>
-					<configurationFilePath>${project.basedir}/src/main/resources/openapi.json</configurationFilePath>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>compile</phase>
-						<goals>
-							<goal>resolve</goal>							
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
 		<pluginManagement>
 			<plugins>
 				<plugin>

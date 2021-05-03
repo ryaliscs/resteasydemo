@@ -57,4 +57,5 @@ open http://localhost:8080/swagger-ui/index.html in your browser
 ## References
 ```
 https://resteasy.github.io/2020/05/22/swagger/
+https://github.com/swagger-api/swagger-samples/tree/2.0/java/java-jaxrs2-openapiservlet
 ```

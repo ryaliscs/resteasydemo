@@ -11,26 +11,22 @@ run Maven update
 
 run Maven build
 
-```
-The above command will compile the project and generate the Swagger JSON file:
-/src/main/webapp/resources/jaxrs-api.json
-```
-
 ## Example end-points
 ```
-http://localhost:8080/resteasydemo/user-management/users
-http://localhost:8080/resteasydemo/user-management/user?{id}
+http://localhost:8080/resteasydemo/api/user-management/users
+http://localhost:8080/resteasydemo/api/user-management/user?{id}
 ```
+
 ## Configuring Swagger as a part of web application 
 ```
 1. Go to the Swagger UI GitHub project [https://github.com/swagger-api/swagger-ui]
 2. Click Clone or download
-3. Copy the dist folder from swagger-ui to your resource folder eg: /src/main/webapp/swagger
-4. Inside your swagger-ui folder, open index.html
+3. Copy the dist folder contents from swagger-ui to your resource folder eg: /src/main/webapp/swagger
+4. Inside your swagger folder, open index.html
 5. Look for the following code:
 	url: "http://petstore.swagger.io/v2/swagger.json"
-6. Change the url value to your rest end point URL. 
-	For example:url: "http://localhost:8080/swagger-ui/jaxrs-api.json"
+6. Change the url value to your openapi rest end point URL. 
+	For example:url: "http://localhost:8080/resteasydemo/openapi/openapi.json"
 7. Deploy the application 	
 8. start  your tomcat
 
@@ -43,12 +39,11 @@ open http://localhost:8080/resteasydemo/swagger/index.html in your browser
 2. Click Clone or download
 3. Copy the dist folder from swagger-ui to your tomcat/webapps folder
 4. rename dist to your preferred name, eg:swagger-ui
-5. Copy jaxrs-api.json to tomcat/webapps/swagger-ui folder 
 5. Inside your swagger-ui folder, open index.html
 6. Look for the following code:
 	url: "http://petstore.swagger.io/v2/swagger.json"
-7. Change the url value to your rest end point URL. 
-	For example:url: "http://localhost:8080/swagger-ui/jaxrs-api.json"
+7. Change the url value to your openapi rest end point URL. 
+	For example:url: "http://localhost:8080/resteasydemo/openapi/openapi.json"
 8. start  your tomcat
 
 open http://localhost:8080/swagger-ui/index.html in your browser 

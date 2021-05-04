@@ -1,5 +1,7 @@
 package com.resyeasy.restful;
 
+import java.net.http.HttpResponse;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -14,6 +16,11 @@ import javax.ws.rs.core.Response;
 import com.resyeasy.data.PersonPOJO;
 import com.resyeasy.repo.UserRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
@@ -35,6 +42,7 @@ public class UserManagementModule {
 	@Path("/users")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Operation(summary = "Get all Users", description = "Get list of users")
 	public Response getAllUsers() {
 		return Response.ok(UserRepository.getAllUsers()).build();
 	}
@@ -48,10 +56,13 @@ public class UserManagementModule {
 	@GET
 	@Path("/user/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-
-	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "User found"),
+	@Operation(summary = "Get user by User Id", description = "Retuns the User", responses = {
+			@ApiResponse(responseCode = "200", description = "User found", //
+					content = @Content(mediaType = "application/json", //
+							schema = @Schema(implementation = PersonPOJO.class))),
 			@ApiResponse(responseCode = "204", description = "User not found") })
-	public Response getUser(@PathParam("id") int id) {
+	public Response getUser(
+			@Parameter(description = "The User Id of the User", required = true) @PathParam("id") int id) {
 		PersonPOJO user = UserRepository.getUser(id);
 		if (user != null) {
 			return Response.ok(user).build();
@@ -59,11 +70,23 @@ public class UserManagementModule {
 		return Response.noContent().build();
 	}
 
+	/**
+	 * Create User: Creates the user as per the given aPerson POJO
+	 * 
+	 * @param aPerson Person to be created
+	 * @return the created Person
+	 */
 	@POST
 	@Path("/user")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createUser(PersonPOJO aPerson) {
+	@Operation(summary = "Create user", description = "Creates a User", responses = {
+			@ApiResponse(responseCode = "200", description = "User created", //
+					content = @Content(mediaType = "application/json", //
+							schema = @Schema(implementation = PersonPOJO.class))),
+			@ApiResponse(responseCode = "409", description = "User not found") })
+	public Response createUser(@RequestBody(description = "Created user object", required = true, //
+			content = @Content(schema = @Schema(implementation = PersonPOJO.class))) PersonPOJO aPerson) {
 		PersonPOJO user = UserRepository.createUser(aPerson);
 		if (user == null) {
 			return Response.status(Response.Status.CONFLICT).build();
@@ -72,11 +95,23 @@ public class UserManagementModule {
 
 	}
 
+	/**
+	 * Update User : updates the user as per aPerson parameter
+	 * 
+	 * @param aPerson Person data to be updated
+	 * @return updated {@link PersonPOJO} as response
+	 */
 	@PUT
 	@Path("/user")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateUser(PersonPOJO aPerson) {
+	@Operation(summary = "Update User", description = "Updates the User", responses = {
+			@ApiResponse(responseCode = "200", description = "User updated", //
+					content = @Content(mediaType = "application/json", //
+							schema = @Schema(implementation = PersonPOJO.class))),
+			@ApiResponse(responseCode = "400", description = "User not found") })
+	public Response updateUser(@RequestBody(description = "Updates the User object", required = true, //
+			content = @Content(schema = @Schema(implementation = PersonPOJO.class))) PersonPOJO aPerson) {
 		PersonPOJO user = UserRepository.updateUser(aPerson);
 		if (user == null) {
 			return Response.status(Response.Status.BAD_REQUEST).build();
@@ -85,10 +120,21 @@ public class UserManagementModule {
 
 	}
 
+	/**
+	 * Delete User: Delete the user by given User Id
+	 * @param id Id of the user to be deleted
+	 * @return {@link Response.Status.OK} if user is successfully deleted, otherwise returns {@link Response.Status.CONFLICT}
+	 */
 	@DELETE
 	@Path("/user/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deleteUser(@PathParam("id") int id) {
+	@Operation(summary = "Delete user by User Id", description = "Removes the User", responses = {
+			@ApiResponse(responseCode = "200", description = "User deleted", //
+					content = @Content(mediaType = "application/json", //
+							schema = @Schema(implementation = PersonPOJO.class))),
+			@ApiResponse(responseCode = "409", description = "User not found") })
+	public Response deleteUser(
+			@Parameter(description = "The User Id of the User to be removed", required = true) @PathParam("id") int id) {
 		if (UserRepository.deleteUser(id)) {
 			return Response.ok().build();
 		}

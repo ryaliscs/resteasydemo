@@ -1,7 +1,5 @@
 package com.resyeasy.restful;
 
-import java.net.http.HttpResponse;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,15 +20,18 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 /**
+ * Rest Service for User management. Allows to Add, List, Update and Read Users
+ * 
  * References :
  * 
  * https://resteasy.github.io/2020/05/22/swagger/
  *
  */
-@Path("/user-management")
+@Path("user-management")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class UserManagementModule {
 
 	/**
@@ -39,10 +40,11 @@ public class UserManagementModule {
 	 * @return all the users
 	 */
 	@GET
-	@Path("/users")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Operation(summary = "Get all Users", description = "Get list of users")
+	@Path("users")
+	@Operation(summary = "Get all Users", description = "Get list of users", responses = {
+			@ApiResponse(responseCode = "200", description = "List of Users", //
+					content = @Content(mediaType = "application/json", //
+							schema = @Schema(implementation = PersonPOJO.class))) })
 	public Response getAllUsers() {
 		return Response.ok(UserRepository.getAllUsers()).build();
 	}
@@ -54,8 +56,7 @@ public class UserManagementModule {
 	 * @return returns the user with the given ID
 	 */
 	@GET
-	@Path("/user/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Path("user/{id}")
 	@Operation(summary = "Get user by User Id", description = "Retuns the User", responses = {
 			@ApiResponse(responseCode = "200", description = "User found", //
 					content = @Content(mediaType = "application/json", //
@@ -77,9 +78,7 @@ public class UserManagementModule {
 	 * @return the created Person
 	 */
 	@POST
-	@Path("/user")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("user")
 	@Operation(summary = "Create user", description = "Creates a User", responses = {
 			@ApiResponse(responseCode = "200", description = "User created", //
 					content = @Content(mediaType = "application/json", //
@@ -102,9 +101,7 @@ public class UserManagementModule {
 	 * @return updated {@link PersonPOJO} as response
 	 */
 	@PUT
-	@Path("/user")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("user")
 	@Operation(summary = "Update User", description = "Updates the User", responses = {
 			@ApiResponse(responseCode = "200", description = "User updated", //
 					content = @Content(mediaType = "application/json", //
@@ -122,12 +119,13 @@ public class UserManagementModule {
 
 	/**
 	 * Delete User: Delete the user by given User Id
+	 * 
 	 * @param id Id of the user to be deleted
-	 * @return {@link Response.Status.OK} if user is successfully deleted, otherwise returns {@link Response.Status.CONFLICT}
+	 * @return {@link Response.Status.OK} if user is successfully deleted, otherwise
+	 *         returns {@link Response.Status.CONFLICT}
 	 */
 	@DELETE
-	@Path("/user/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Path("user/{id}")
 	@Operation(summary = "Delete user by User Id", description = "Removes the User", responses = {
 			@ApiResponse(responseCode = "200", description = "User deleted", //
 					content = @Content(mediaType = "application/json", //

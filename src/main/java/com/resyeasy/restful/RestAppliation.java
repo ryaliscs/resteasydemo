@@ -13,7 +13,7 @@ import javax.ws.rs.core.Application;
  * @author saryal
  *
  */
-@ApplicationPath("/api")
+@ApplicationPath("api")
 public class RestAppliation extends Application {
 	/**
 	 * If you return any empty set for by classes and singletons, the WAR will be
